@@ -55,17 +55,18 @@ public class DatabaseHelper {
 		}
 	}
 	/**
-	 * 查询实体列表
+	 * 鏌ヨ瀹炰綋鍒楄〃
 	 */
 	public static<T> List<T> queryEntiryList(Class<T> entityClass,String sql,Object params){
 		List<T> entityList;
+		Connection conn = null;
 		try{
-			entityList = QUERY_RUNNER.query(getConnection(), sql, new BeanListHandler<T>(entityClass),params);
+			entityList = QUERY_RUNNER.query(conn = getConnection(), sql, new BeanListHandler<T>(entityClass),params);
 		}catch(SQLException e){
 			LOGGER.error("query entity list failure",e);
 			throw new RuntimeException(e);
 		}finally{
-			closeConnection();
+			closeConnection(conn);
 		}
 		return null;
 	}
