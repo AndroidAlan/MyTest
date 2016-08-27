@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,8 @@ public class CustomerService {
 	 */
 	public Customer getCustomer(long id){
 		
-		return null;
+		String sql ="SELECT* FROM customer WHERE id = ?";
+		return DatabaseHelper.queryEntry(Customer.class, sql, id);
 	}
 	
 	/**
